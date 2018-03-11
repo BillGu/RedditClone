@@ -13,3 +13,7 @@ export const TOPIC_CREATED = 'TOPIC_CREATED'
 export const VOTE_UP = "VOTE_UP"
 export const VOTE_DOWN = "VOTE_DOWN"
 export const VOTE_ERROR = "VOTE_ERROR"
+
+
+//Notifications
+export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';

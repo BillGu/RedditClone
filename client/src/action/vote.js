@@ -2,6 +2,8 @@ import axios from 'axios'
 
 import {API_URL, VOTE_UP, VOTE_DOWN, VOTE_ERROR} from '../action'
 
+import {addNotification} from './notification'
+
 // axios.defaults.baseURL = 'http://' + API_URL;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
@@ -32,10 +34,12 @@ export function upVote(id) {
 			  })
 			 .then((response) => {
 			 	dispatch(voteUp());
+			 	dispatch(addNotification("Succesfully upvoted topic", 'success'));
 			 })
 			 .catch((error) => {
 			 	const msg = (error.response) ? error.response.data : "Error Voting on Topic! Something went wrong";
-		 		dispatch(voteError(msg));						
+		 		dispatch(voteError(msg));	
+		 		dispatch(addNotification(msg, 'error'));					
 			 });
 		}
 }
@@ -48,10 +52,12 @@ export function downVote(id) {
 			  })
 			 .then((response) => {
 			 	dispatch(voteDown());
+			 	dispatch(addNotification("Succesfully downvoted topic", 'success'));
 			 })
 			 .catch((error) => {
 			 	const msg = (error.response) ? error.response.data : "Error Voting on Topic! Something went wrong";
-		 		dispatch(voteError(msg));						
+		 		dispatch(voteError(msg));
+		 		dispatch(addNotification(msg, 'error'));						
 			 });
 		}
 }

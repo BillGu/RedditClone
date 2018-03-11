@@ -8,6 +8,7 @@ import configureStore from './store/configureStore'
 import NavBar from './component/navbar'
 import Main from './component/main'
 import TopicAddition from './component/addTopic'
+import NotificationContainer from './component/notification';
 
 //routing
 import { Router, Route, Link } from 'react-router-dom'
@@ -27,6 +28,7 @@ class App extends Component {
                <Route path="/topic" component={TopicAddition} />
              </div>
           </Router>
+          <NotificationContainer/>
 	      </div>
       </Provider>
     );
