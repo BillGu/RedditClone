@@ -17,8 +17,8 @@ app.use(function(req, res, next) {
 app.use(bodyParser.urlencoded({ extended: false }))
 
 //simple in-memory data structure
-var data = [{"Id": 0, "Topic": "Rahul", "Votes": 1}];
-var size = 1;
+var data = []; //{"Id": 0, "Topic": "Rahul", "Votes": 1} (example of row)
+var size = 0;
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -32,15 +32,33 @@ app.get('/',function (req,res) {
 //TODO: check if topic already exists and return error message
 app.post('/topic', bodyParser.urlencoded(), function(req, res) {
 	
-	var lastId = data[size - 1]["Id"];
-
 	var topic = req.body.topic;
-	var row = {"Id": lastId + 1, "Topic": topic, "Votes": 0};
+	var duplicate = false;
 
-	data.push(row);
-	size++;
+	for (var i = 0; i < size; ++i) {
+		if (data[i]["Topic"] == topic)
+			duplicate = true;
+	}
 
-	res.send(JSON.stringify({text : "Succesfully Added Topic!"}));
+	if (topic.length > 255) {
+		res.status(401).send("Topic length is too long (exceeds 255 characters)");
+	} else if (duplicate) {
+		res.status(401).send("Topic already created!");
+	} else {
+
+		var lastId = -1;
+
+		if (size != 0)
+			lastId = data[size - 1]["Id"];
+
+		
+		var row = {"Id": lastId + 1, "Topic": topic, "Votes": 0};
+
+		data.push(row);
+		size++;
+
+		res.send(JSON.stringify({text : "Succesfully Added Topic!"}));
+	}
 });
 
 //Upvote or Downvote a topic
@@ -120,3 +138,5 @@ app.use(function (err, req, res, next) {
 
 var port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Application listening on port ${port}!`))
+
+module.exports = app;
