@@ -66,6 +66,7 @@ class Main extends React.Component{
           <Grid>
   	  			<Row>
   	  				<PageHeader><Glyphicon glyph="time" />&nbsp;Reddit Clone <small>Some say its better than reddit itself...</small></PageHeader>
+              <p><i>Vote on your favourite topics below. Top 20 topics are shown below (refresh page to reorder after voting!)</i></p><br/>
   	  			</Row>
 
             <Row>
