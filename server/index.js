@@ -39,43 +39,73 @@ app.post('/topic', bodyParser.urlencoded(), function(req, res) {
 	res.send(JSON.stringify({text : "Succesfully Added Topic!"}));
 });
 
-//Upvote a topic
-app.get('/topic/upvote/:id', bodyParser.urlencoded(), function(req, res) {
-
+//Upvote or Downvote a topic
+app.get('/topic/vote/:id/:flag', bodyParser.urlencoded(), function(req, res) {
 	var id = req.params.id;
+	var flag = req.params.flag;
 
 	if (id >= 0 && id < size && data[id] != null) {
 
 		var row = data[id];
-		row["Votes"]++;
-		res.send(JSON.stringify({text : "Succesfully Upvoted on " + row["Topic"]}));
+
+		if (flag == 1) {
+			row["Votes"]++;
+			res.send(JSON.stringify({text : "Succesfully Upvoted on " + row["Topic"]}));
+		} else if (flag == 0) {
+			row["Votes"]--;
+			res.send(JSON.stringify({text : "Succesfully Downvoted on " + row["Topic"]}));
+		} else {
+			res.status(401).send("Error in flag passed in");
+		}
 
 	} else {
 		res.status(401).send("Error in id value passed in");
 	}
-
 });
 
-//Downvote a topic
-app.get('/topic/downvote/:id', bodyParser.urlencoded(), function(req, res) {
+//GET all topics - sorted by votes
+app.get('/topic/:flag', bodyParser.urlencoded(), function(req, res) {
 
-	var id = req.param.id;
+	var flag = req.params.flag;
+	var tempData = [];
 
-	if (Number.isInteger(id) && id > 0 && id < size && data[id] != null) {
-
-		var row = data[id];
-		row["Votes"]--;
-		res.send(JSON.stringify({text : "Succesfully Downvoted on " + data["Topic"]}));
-
-	} else {
-		res.status(401).send("Error in id value passed in");
+	for (var i = 0; i < size; ++i) {
+		if (data[i] != null)
+			tempData.push(data[i]);
 	}
 
+	tempData.sort(function(first, second) {
+		if (first["Votes"] > second["Votes"]) {
+			return -1;
+		} else if (first["Votes"] < second["Votes"]) {
+			return 1;
+		} else {
+			return 0;
+		}
+	});
+
+	if (flag == 0 || tempData.length <= 20)
+		res.send(JSON.stringify(tempData));
+	else if (flag == 1) {
+		var newData = [];
+		for (var i = 0; i < 20; ++i)
+			newData.push(tempData[i]);
+		res.send(JSON.stringify(newData));
+	} else {
+		res.status(401).send("Error in flag passed in");
+	}
 });
 
-//GET all topics
-app.get('/topic', bodyParser.urlencoded(), function(req, res) {
-	res.send(JSON.stringify(data));
+//Remove a topic
+app.get('/topic/remove/:id', bodyParser.urlencoded(), function(req, res) {
+	var id = req.params.id;
+	if (id >= 0 && id < size && data[id] != null) {
+		var topic = data[id]["Topic"];
+		data[id] = null;
+		res.send(JSON.stringify({text : "Removed " + topic}));
+	} else {
+		res.status(401).send("Topic at ID value removed or does not exit!")
+	}
 });
 
 app.listen(5000, () => console.log('Server listening on port 5000!'))
