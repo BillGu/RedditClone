@@ -4,6 +4,7 @@ var express = require('express')
 //Get Supporting Requirements
 var app = express()
 var bodyParser = require('body-parser');
+var path = require('path');
 
 //set header controls
 app.use(function(req, res, next) {
@@ -18,6 +19,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //simple in-memory data structure
 var data = [{"Id": 0, "Topic": "Rahul", "Votes": 1}];
 var size = 1;
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 //main message (to check if API Server is up!)
 app.get('/',function (req,res) {
@@ -115,4 +119,4 @@ app.use(function (err, req, res, next) {
 })
 
 var port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Server listening on port ${port}!`))
+app.listen(port, () => console.log(`Application listening on port ${port}!`))
