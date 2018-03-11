@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { Grid, Row, Col, Button, Glyphicon, PageHeader, Checkbox } from 'react-bootstrap';
 import Topic from './topic';
 
+import {Link} from 'react-router-dom'
+
 import { connect } from 'react-redux'
 import { getTopic } from '../action/topic'
 
@@ -29,7 +31,7 @@ class Main extends React.Component{
 
             <Row>
               <Col sm={2}>
-                <Button bsStyle="primary">Add a topic</Button>
+                <Link to={'/topic'}><Button bsStyle="primary">Add a topic</Button></Link>
               </Col>
 
               <Col sm={4}>

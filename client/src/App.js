@@ -7,6 +7,7 @@ import configureStore from './store/configureStore'
 //components
 import NavBar from './component/navbar'
 import Main from './component/main'
+import TopicAddition from './component/addTopic'
 
 //routing
 import { Router, Route, Link } from 'react-router-dom'
@@ -23,6 +24,7 @@ class App extends Component {
           <Router history={history}>
              <div id="wrap">
                <Route exact path="/" component={Main} />
+               <Route path="/topic" component={TopicAddition} />
              </div>
           </Router>
 	      </div>
