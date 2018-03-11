@@ -17,7 +17,18 @@ class Main extends React.Component{
     this.move = false;
     this.handleUpvote = this.handleUpvote.bind(this);
     this.handleDownvote = this.handleDownvote.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   } 
+
+  handleChange(event) {
+    console.log(event.target.checked);
+
+    if (event.target.checked) {
+      this.props.dispatch(getTopic(0));
+    } else {
+      this.props.dispatch(getTopic(1));
+    }
+  }
 
   componentDidMount() {
     this.props.dispatch(getTopic(1));
@@ -75,7 +86,7 @@ class Main extends React.Component{
               </Col>
 
               <Col sm={4}>
-                <Checkbox>View all topics</Checkbox>
+                <Checkbox onChange={this.handleChange}>View all topics</Checkbox>
               </Col>
             </Row>
 
