@@ -16,7 +16,7 @@ app.use(function(req, res, next) {
 app.use(bodyParser.urlencoded({ extended: false }))
 
 //simple in-memory data structure
-var data = [{"Id": 1, "Topic": "Rahul", "Votes": "1"}];
+var data = [{"Id": 0, "Topic": "Rahul", "Votes": 1}];
 var size = 1;
 
 //main message (to check if API Server is up!)

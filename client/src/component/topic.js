@@ -2,22 +2,21 @@ import React from 'react'
 import {Grid, Row, Col, Panel, ButtonGroup, DropdownButton, MenuItem, Button, Glyphicon} from 'react-bootstrap'
 
 const Topic = (props) => {
-
-	const {data} = props;
+	const {data, handleUpvote, handleDownvote, value} = props;
 
 	return <Panel>
 			 <Grid>
 				 <h3>{data["Topic"]}</h3>
-				 <p>Votes: {data["Votes"]}</p>
+				 <p>Votes: {value[data["Id"]]}</p>
 
 				 <ButtonGroup>
-				  <Button>Upvote</Button>
-				  <Button>Downvote</Button>
+				  <Button name={data["Id"]} onClick={handleUpvote}>Upvote</Button>
+				  <Button name={data["Id"]} onClick={handleDownvote}>Downvote</Button>
 				  <DropdownButton title="Change" id="bg-nested-dropdown">
 				    <MenuItem eventKey="1">Edit</MenuItem>
 				    <MenuItem eventKey="2">Remove</MenuItem>
 				  </DropdownButton>
-				</ButtonGroup>
+				 </ButtonGroup>
 
 				<br/><br/>
 			 </Grid>
