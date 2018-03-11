@@ -15,12 +15,11 @@ class Main extends React.Component{
   } 
 
   componentDidMount() {
-    this.props.dispatch(getTopic());
+    this.props.dispatch(getTopic(1));
   }
 
   render() {
 
-    const numbers = [100, 29, 13, 4, 3, 2, 1];
     const {topic, error} = this.props;
 
   	return (

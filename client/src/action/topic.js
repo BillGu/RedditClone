@@ -1,6 +1,9 @@
 import axios from 'axios'
+import qs from 'qs'
 
-import {API_URL, TOPIC_RETRIEVED, TOPIC_ERROR} from '../action'
+import history from '../history'
+
+import {API_URL, TOPIC_RETRIEVED, TOPIC_ERROR, TOPIC_CREATED} from '../action'
 
 axios.defaults.baseURL = 'http://' + API_URL;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -19,11 +22,17 @@ function topicError(err) {
 	}
 }
 
-export function getTopic() {
+function topicCreated() {
+	return {
+		type: TOPIC_CREATED
+	}
+}
+
+export function getTopic(type) {
 	return (dispatch) => {
 		axios({
 				method: 'get',
-				url: '/topic'
+				url: '/topic/' + type
 			  })
 			 .then((response) => {
 			 	dispatch(topicRetrieved(response.data));
@@ -34,3 +43,24 @@ export function getTopic() {
 			 });
 		}
 }
+
+export function createTopic(topic) {
+	return (dispatch) => {
+		axios({
+				method: 'post',
+				url: '/topic' ,
+				data: qs.stringify({topic: topic})
+			  })
+			 .then((response) => {
+			 	dispatch(topicCreated());
+			 	history.push('/');
+			 })
+			 .catch((error) => {
+			 	const msg = (error.response) ? error.response.data : "Error Adding Topic! Something went wrong";
+		 		dispatch(topicError(msg));						
+			 });
+	}
+}
+
+
+

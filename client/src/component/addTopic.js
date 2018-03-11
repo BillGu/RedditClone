@@ -1,6 +1,9 @@
 import React from 'react'
 import {Col, Button, FormGroup, ControlLabel, FormControl, Form, Glyphicon} from 'react-bootstrap'
 
+import {createTopic} from '../action/topic'
+import { connect } from 'react-redux'
+
 import {Link} from 'react-router-dom'
 
 class TopicAddition extends React.Component{
@@ -32,7 +35,7 @@ class TopicAddition extends React.Component{
          alert('Fields cannot be blank!');
       } else {
         console.log(this.state.topic)
-         // this.props.dispatch(createRequest(this.state.request));
+        this.props.dispatch(createTopic(this.state.topic));
       }
   }
 
@@ -71,5 +74,11 @@ class TopicAddition extends React.Component{
   }
 };
 
-export default TopicAddition;
+function mapStateToProps(state) {
+  return { error: state.topic.error };
+}
+
+export default connect(mapStateToProps)(TopicAddition)
+
+
   

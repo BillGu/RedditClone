@@ -1,4 +1,4 @@
-import {TOPIC_RETRIEVED, TOPIC_ERROR} from '../action'
+import {TOPIC_RETRIEVED, TOPIC_ERROR, TOPIC_CREATED} from '../action'
 
 const initial_state = {}
 
@@ -11,6 +11,10 @@ function topic_reducer(state = initial_state, action) {
 		case TOPIC_ERROR:
 			return Object.assign({}, state, {
 					error: action.err
+  				   });
+		case TOPIC_CREATED:
+			return Object.assign({}, state, {
+					created: true
   				   });
 		default:
 			return state;
