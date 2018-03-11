@@ -5,7 +5,7 @@ import history from '../history'
 
 import {API_URL, TOPIC_RETRIEVED, TOPIC_ERROR, TOPIC_CREATED} from '../action'
 
-axios.defaults.baseURL = 'http://' + API_URL;
+// axios.defaults.baseURL = 'http://' + API_URL;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 function topicRetrieved(topic) {

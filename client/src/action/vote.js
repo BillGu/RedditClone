@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import {API_URL, VOTE_UP, VOTE_DOWN, VOTE_ERROR} from '../action'
 
-axios.defaults.baseURL = 'http://' + API_URL;
+// axios.defaults.baseURL = 'http://' + API_URL;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 function voteUp() {
