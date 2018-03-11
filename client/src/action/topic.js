@@ -3,7 +3,7 @@ import qs from 'qs'
 
 import history from '../history'
 
-import {API_URL, TOPIC_RETRIEVED, TOPIC_ERROR, TOPIC_CREATED} from '../action'
+import {API_URL, TOPIC_RETRIEVED, TOPIC_ERROR, TOPIC_CREATED, TOPIC_REMOVED} from '../action'
 
 import {addNotification} from './notification'
 
@@ -30,6 +30,12 @@ function topicCreated() {
 	}
 }
 
+function topicRemoved() {
+	return {
+		type: TOPIC_REMOVED
+	}
+}
+
 export function getTopic(type) {
 	return (dispatch) => {
 		axios({
@@ -38,7 +44,6 @@ export function getTopic(type) {
 			  })
 			 .then((response) => {
 			 	dispatch(topicRetrieved(response.data));
-
 			 })
 			 .catch((error) => {
 			 	const msg = (error.response) ? error.response.data : "Error Retrieving Topics! Something went wrong";
@@ -66,6 +71,23 @@ export function createTopic(topic) {
 		 		dispatch(addNotification(msg, 'error'));					
 			 });
 	}
+}
+
+export function removeTopic(id) {
+	return (dispatch) => {
+		axios({
+				method: 'get',
+				url: '/topic/remove/' + id
+			  })
+			 .then((response) => {
+			 	dispatch(topicRemoved());
+			 })
+			 .catch((error) => {
+			 	const msg = (error.response) ? error.response.data : "Error Retrieving Topics! Something went wrong";
+		 		dispatch(topicError(msg));	
+		 		dispatch(addNotification(msg, 'error'));	
+			 });
+		}	
 }
 
 

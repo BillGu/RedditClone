@@ -36,7 +36,7 @@ app.post('/topic', bodyParser.urlencoded(), function(req, res) {
 	var duplicate = false;
 
 	for (var i = 0; i < size; ++i) {
-		if (data[i]["Topic"] == topic)
+		if (data[i] != null && data[i]["Topic"] == topic)
 			duplicate = true;
 	}
 

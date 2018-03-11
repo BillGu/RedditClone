@@ -1,5 +1,4 @@
-import {TOPIC_RETRIEVED, TOPIC_ERROR, TOPIC_CREATED} from '../action'
-
+import {TOPIC_RETRIEVED, TOPIC_ERROR, TOPIC_CREATED, TOPIC_REMOVED} from '../action'
 const initial_state = {}
 
 function topic_reducer(state = initial_state, action) {
@@ -15,6 +14,10 @@ function topic_reducer(state = initial_state, action) {
 		case TOPIC_CREATED:
 			return Object.assign({}, state, {
 					created: true
+  				   });
+		case TOPIC_REMOVED:
+			return Object.assign({}, state, {
+					removed: true
   				   });
 		default:
 			return state;

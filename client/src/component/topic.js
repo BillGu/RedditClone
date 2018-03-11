@@ -2,7 +2,7 @@ import React from 'react'
 import {Grid, Row, Col, Panel, ButtonGroup, DropdownButton, MenuItem, Button, Glyphicon} from 'react-bootstrap'
 
 const Topic = (props) => {
-	const {data, handleUpvote, handleDownvote, value} = props;
+	const {data, handleUpvote, handleDownvote, handleRemove, value} = props;
 
 	return <Panel>
 			 <Grid>
@@ -13,8 +13,7 @@ const Topic = (props) => {
 				  <Button name={data["Id"]} onClick={handleUpvote}>Upvote</Button>
 				  <Button name={data["Id"]} onClick={handleDownvote}>Downvote</Button>
 				  <DropdownButton title="Change" id="bg-nested-dropdown">
-				    <MenuItem eventKey="1">Edit</MenuItem>
-				    <MenuItem eventKey="2">Remove</MenuItem>
+				    <MenuItem eventKey="1" name={data["Id"]} onClick={handleRemove}>Remove</MenuItem>
 				  </DropdownButton>
 				 </ButtonGroup>
 

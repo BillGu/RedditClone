@@ -6,7 +6,7 @@ import Topic from './topic';
 import {Link} from 'react-router-dom'
 
 import { connect } from 'react-redux'
-import { getTopic } from '../action/topic'
+import { getTopic, removeTopic } from '../action/topic'
 import { upVote, downVote } from '../action/vote'
 
 class Main extends React.Component{
@@ -18,6 +18,7 @@ class Main extends React.Component{
     this.handleUpvote = this.handleUpvote.bind(this);
     this.handleDownvote = this.handleDownvote.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   } 
 
   handleChange(event) {
@@ -26,6 +27,13 @@ class Main extends React.Component{
     if (event.target.checked) {
       this.props.dispatch(getTopic(0));
     } else {
+      this.props.dispatch(getTopic(1));
+    }
+  }
+
+  handleRemove(event) {
+    if (window.confirm("Are you sure you want to delete this topic? All votes will be lost")) {
+      this.props.dispatch(removeTopic(event.target.name));
       this.props.dispatch(getTopic(1));
     }
   }
@@ -95,7 +103,7 @@ class Main extends React.Component{
             <Row>
               {topic && !error && this.move &&
               <Col sm={8} smOffset={1}>
-                {topic.map((data) => <Topic data={data} key={data["Id"]} handleUpvote={this.handleUpvote} handleDownvote={this.handleDownvote} value={this.state}/>)}
+                {topic.map((data) => <Topic data={data} key={data["Id"]} handleUpvote={this.handleUpvote} handleDownvote={this.handleDownvote} handleRemove={this.handleRemove} value={this.state}/>)}
               </Col>
               }
             </Row>
