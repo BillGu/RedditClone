@@ -8,6 +8,10 @@ import configureStore from './store/configureStore'
 import NavBar from './component/navbar'
 import Main from './component/main'
 
+//routing
+import { Router, Route, Link } from 'react-router-dom'
+import history from './history';
+
 const store = configureStore({});
 
 class App extends Component {
@@ -16,7 +20,11 @@ class App extends Component {
       <Provider store={store}>
 	      <div className="App">
 	        <NavBar/>
-	        <Main/>
+          <Router history={history}>
+             <div id="wrap">
+               <Route exact path="/" component={Main} />
+             </div>
+          </Router>
 	      </div>
       </Provider>
     );
