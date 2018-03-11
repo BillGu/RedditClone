@@ -16,7 +16,7 @@ app.use(function(req, res, next) {
 app.use(bodyParser.urlencoded({ extended: false }))
 
 //simple in-memory data structure
-var data = {"Rahul": 1};
+var data = [{"Id": 1, "Topic": "Rahul", "Votes": "1"}];
 
 //main message (to check if API Server is up!)
 app.get('/',function (req,res) {
@@ -36,4 +36,4 @@ app.get('/topic', bodyParser.urlencoded(), function(req, res) {
 	res.send(JSON.stringify(data));
 });
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(5000, () => console.log('Server listening on port 5000!'))
