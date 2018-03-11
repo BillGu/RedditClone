@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import NotificationSystem from 'react-notification-system';
 
+//notification container from react notification system
 class NotificationContainer extends React.Component {
 
   constructor(props) {

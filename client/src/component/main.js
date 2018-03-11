@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import { getTopic, removeTopic } from '../action/topic'
 import { upVote, downVote } from '../action/vote'
 
+//Main Page
 class Main extends React.Component{
 
   constructor(props) {
@@ -21,6 +22,7 @@ class Main extends React.Component{
     this.handleRemove = this.handleRemove.bind(this);
   } 
 
+  //gets all topics or just top 20 based on checkbox click
   handleChange(event) {
     console.log(event.target.checked);
 
@@ -31,6 +33,7 @@ class Main extends React.Component{
     }
   }
 
+  //removes a topic on button press
   handleRemove(event) {
     if (window.confirm("Are you sure you want to delete this topic? All votes will be lost")) {
       this.props.dispatch(removeTopic(event.target.name));
@@ -38,10 +41,12 @@ class Main extends React.Component{
     }
   }
 
+  //gets top 20 topics on button press
   componentDidMount() {
     this.props.dispatch(getTopic(1));
   }
 
+  //sets the state for votes so that button press increments/decrements counter
   componentWillReceiveProps(props) {
     const data = props.topic;
     const error = props.error;
@@ -57,6 +62,7 @@ class Main extends React.Component{
     }
   }
 
+  //dispatches action to upvote a topic
   handleUpvote(event) {
     var id = event.target.name;
     var newVotes = this.state[id] + 1;
@@ -67,6 +73,7 @@ class Main extends React.Component{
       this.setState({[id]: newVotes});
   } 
 
+  //similar to above but just downvote
   handleDownvote(event) {
     var id = event.target.name;
     var newVotes = this.state[id] - 1;

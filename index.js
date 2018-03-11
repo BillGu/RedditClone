@@ -29,7 +29,7 @@ app.get('/',function (req,res) {
 });
 
 //POST a new topic
-//TODO: check if topic already exists and return error message
+//checks for topic length and duplicate topics
 app.post('/topic', bodyParser.urlencoded(), function(req, res) {
 	
 	var topic = req.body.topic;

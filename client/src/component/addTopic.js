@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 
 import {Link} from 'react-router-dom'
 
+//Adds a topic (react forms)
 class TopicAddition extends React.Component{
   
   constructor(props) {

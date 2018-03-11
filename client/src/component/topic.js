@@ -1,6 +1,7 @@
 import React from 'react'
 import {Grid, Row, Col, Panel, ButtonGroup, DropdownButton, MenuItem, Button, Glyphicon} from 'react-bootstrap'
 
+//Topic component that is used by main
 const Topic = (props) => {
 	const {data, handleUpvote, handleDownvote, handleRemove, value} = props;
 
