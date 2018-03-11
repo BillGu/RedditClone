@@ -108,4 +108,10 @@ app.get('/topic/remove/:id', bodyParser.urlencoded(), function(req, res) {
 	}
 });
 
+//Unforseen error handling
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('There was an error')
+})
+
 app.listen(5000, () => console.log('Server listening on port 5000!'))
