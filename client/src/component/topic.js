@@ -3,10 +3,12 @@ import {Grid, Row, Col, Panel, ButtonGroup, DropdownButton, MenuItem, Button, Gl
 
 const Topic = (props) => {
 
+	const {data} = props;
+
 	return <Panel>
 			 <Grid>
-				 <h3>This is a topic</h3>
-				 <p>Votes: 100</p>
+				 <h3>{data["Topic"]}</h3>
+				 <p>Votes: {data["Votes"]}</p>
 
 				 <ButtonGroup>
 				  <Button>Upvote</Button>
