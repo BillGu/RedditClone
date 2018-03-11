@@ -9,6 +9,7 @@ import NavBar from './component/navbar'
 import Main from './component/main'
 import TopicAddition from './component/addTopic'
 import NotificationContainer from './component/notification';
+import Help from './component/help';
 
 //routing
 import { Router, Route, Link } from 'react-router-dom'
@@ -26,6 +27,7 @@ class App extends Component {
              <div id="wrap">
                <Route exact path="/" component={Main} />
                <Route path="/topic" component={TopicAddition} />
+               <Route path="/help" component={Help} />
              </div>
           </Router>
           <NotificationContainer/>

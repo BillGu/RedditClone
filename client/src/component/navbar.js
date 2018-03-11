@@ -18,7 +18,7 @@ class NavBar extends React.Component{
 		    </Navbar.Header>
 		    <Navbar.Collapse>
 			    	<Nav pullRight>
-				        <NavItem>Help&nbsp;<Glyphicon glyph="info-sign" /></NavItem>
+				        <NavItem href="/help">Help&nbsp;<Glyphicon glyph="info-sign" /></NavItem>
 			        </Nav>
 		    </Navbar.Collapse>
 		  </Navbar>;	
