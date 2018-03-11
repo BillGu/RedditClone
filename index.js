@@ -114,4 +114,5 @@ app.use(function (err, req, res, next) {
   res.status(500).send('There was an error')
 })
 
-app.listen(5000, () => console.log('Server listening on port 5000!'))
+var port = process.env.PORT || 5000;
+app.listen(port, () => console.log(`Server listening on port ${port}!`))
